@@ -2,7 +2,7 @@ MusicHub::Application.routes.draw do
 
   post 'twilio/voice' => 'twilio#voice'  
 
-root 'twilio#index'
+  root 'twilio#index'
   match 'ivr/welcome' => 'twilio#ivr_welcome', via: [:get, :post], as: 'welcome'
 
   match 'ivr/selection' => 'twilio#menu_selection', via: [:get, :post], as: 'menu'
