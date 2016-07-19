@@ -12,7 +12,15 @@ class RecordingsController < ApplicationController
   # POST /recordings/create
   def create
     agent_id = params[:agent_id]
-    @agent = Agent.find(agent_id)
+
+
+    twiml = Twilio::TwiML::Response.new do |r|
+        r.Play params[:RecordingUrl] + ".mp3"
+        r.Record maxLength: '20', transcribe: true, transcribeCallback: "/recordings/create?agent_id=#{params[:agent_id]}"
+        r.Say "I did not receive a recording.", voice: 'alice'
+      end
+      
+    
 
     @agent.recordings.create(
       url: params[:RecordingUrl] + ".mp3",
