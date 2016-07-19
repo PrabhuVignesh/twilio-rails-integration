@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Music Hub</title>
+    <% @user ||= current_user %>
+        <meta charset="utf-8">
+    <meta name="description" content="Responsive Bootstrap Landing Page Template">
+    <meta name="keywords" content="Bootstrap, Landing page, Template, Registration, Landing">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="author" content="Grayrids">
+    <%= stylesheet_link_tag "application", media: "all" %>
+    <%= stylesheet_link_tag "plugin-min.css" , media: "all", "data-turbolinks-track" => true %>
+    <%= stylesheet_link_tag "custom-min.css" , media: "all", "data-turbolinks-track" => true %>
+
+    <%= javascript_include_tag "application" %>
+    <%= csrf_meta_tags %>
+    <%= render 'layouts/shim' %>
+  </head>
+  <body id="top" class="scrollspy">
+  <div id="loader-wrapper">
+    <div id="loader"></div>
+
+    <div class="loader-section section-left"></div>
+    <div class="loader-section section-right"></div>
+
+  </div>
+    <%= render 'layouts/header' %>
+      <% flash.each do |key, value| %>
+        <div class="alert alert-<%= key %>"><%= value %></div>
+      <% end %>
+      <%= yield %>
+      <%= render 'layouts/footer' %>
+
+  </body>
+  <%= javascript_include_tag "plugin-min.js" %>
+  <%= javascript_include_tag "custom-min.js" %>
+
+</html>
