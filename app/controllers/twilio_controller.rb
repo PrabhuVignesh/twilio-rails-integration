@@ -61,7 +61,7 @@ To get permission you have, press 4. To
 
     case user_selection
     when "1"
-	response = Twilio::TwiML::Response.new do |r|
+	     response = Twilio::TwiML::Response.new do |r|
           r.Say 'Hi.. welcome to satori application! it is really nice to have you connected with satori application enjoy the music', :voice => 'alice'
          r.Play 'http://linode.rabasa.com/cantina.mp3'
         end
