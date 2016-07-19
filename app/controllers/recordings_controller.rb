@@ -1,7 +1,7 @@
 require 'twilio-ruby'
 
 class RecordingsController < ApplicationController
-
+skip_before_action :verify_authenticity_token
   # GET /recordings/:agent
   def show
     @agent_number = params[:agent]
