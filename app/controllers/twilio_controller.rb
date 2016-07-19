@@ -108,8 +108,8 @@ To get permission you have, press 4. To record your voice, press 5. To listen la
     recording = params[:RecordingUrl]
      if (status != "completed" || recording.nil? ) 
       twiml = Twilio::TwiML::Response.new do |r|
-        r.Say "Please say something to record", voice: 'alice'
-        r.Record maxLength: '20', transcribe: true, transcribeCallback: "/ivr/record_create"
+        r.Say "Please record your response after the beep. Press # to complete", voice: 'alice'
+        r.Record maxLength: '20', transcribe: true, transcribeCallback: "/ivr/record_create", :finishOnKey => '#', :maxLength => '90'
 
         #r.Record maxLength: '20', transcribe: true
 
