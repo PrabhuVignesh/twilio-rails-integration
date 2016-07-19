@@ -14,6 +14,7 @@ class RecordingsController < ApplicationController
     agent_id = params[:agent_id]
 
     @record = Recording.new
+    raise @record.inspect
     @record.url = params[:RecordingUrl] + ".mp3"
     @record.transcription = params[:TranscriptionText]
     @record.phone_number = params[:Caller]
