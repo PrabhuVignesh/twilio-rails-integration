@@ -71,7 +71,7 @@ To get permission you have, press 4. To record your voice, press 5. To
     when "4"
       twiml_say("Admin, Owners, Viewers")
     when "5"
-      twiml_say("Admin, Owners, Viewers")
+      agent_voicemail
     else
       @output = "Returning to the main menu."
       twiml_say(@output)
@@ -79,8 +79,21 @@ To get permission you have, press 4. To record your voice, press 5. To
   end
 
 
-  # POST ivr/agent_voicemail
-  def agent_voicemail
+  # # POST ivr/agent_voicemail
+  # def agent_voicemail
+  #     recording = params[:RecordingUrl]
+  #     twiml = Twilio::TwiML::Response.new do |r|
+  #       r.Say "Please say something to record", voice: 'alice'
+  #       r.Record maxLength: '20', transcribe: true, transcribeCallback: "/recordings/create?agent_id=#{params[:agent_id]}"
+  #       r.Say "I did not receive a recording.", voice: 'alice'
+  #     end
+  #   render xml: twiml.to_xml
+  # end
+
+
+  private
+  
+    def agent_voicemail
       recording = params[:RecordingUrl]
       twiml = Twilio::TwiML::Response.new do |r|
         r.Say "Please say something to record", voice: 'alice'
@@ -89,9 +102,6 @@ To get permission you have, press 4. To record your voice, press 5. To
       end
     render xml: twiml.to_xml
   end
-
-
-  private
 
   def wait_music(phrase, exit = false)
     response = Twilio::TwiML::Response.new do |r|          
