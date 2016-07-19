@@ -11,7 +11,6 @@ skip_before_action :verify_authenticity_token
 
   # POST /recordings/create
   def create
-    agent_id = params[:agent_id]
 
     @record = Recording.new
     @record.url = params[:RecordingUrl] + ".mp3"
