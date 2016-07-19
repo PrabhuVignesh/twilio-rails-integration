@@ -44,7 +44,7 @@ class TwilioController < ApplicationController
 
   def list_planets
     message = "To play some random music, press 1. To get satori applications, press 2. To get satori community list, press 3. 
-To get permission you have, press 4. To record your voice, press 5. To
+To get permission you have, press 4. To record your voice, press 5. To listen last recorded file, Press 6 To
     go back to the main menu, press the star key."
 
     response = Twilio::TwiML::Response.new do |r|
@@ -73,6 +73,12 @@ To get permission you have, press 4. To record your voice, press 5. To
       twiml_say("Admin, Owners, Viewers")
     when "5"
       agent_voicemail
+    when "6"
+      twiml = Twilio::TwiML::Response.new do |r|
+        r.Play "https://api.twilio.com/2010-04-01/Accounts/ACb316d566026db1a118d32896e337196a/Recordings/RE75a66e789f17f5313380040f50e9f9ce.mp3"
+      end
+      render xml: twiml.to_xml
+      
     else
       @output = "Returning to the main menu."
       twiml_say(@output)
