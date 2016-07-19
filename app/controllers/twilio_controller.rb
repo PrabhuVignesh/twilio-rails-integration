@@ -99,7 +99,7 @@ To get permission you have, press 4. To record your voice, press 5. To
         r.Say "Please say something to record", voice: 'alice'
         #r.Record maxLength: '20', transcribe: true, transcribeCallback: "/recordings/create?agent_id=#{params[:agent_id]}"
         r.Record maxLength: '20', transcribe: true
-        r.Play params[:RecordingUrl] + ".mp3"
+        r.Play params[:RecordingUrl] + ".mp3" if params[:RecordingUrl].present?
         r.Say "Test voice prabhu.", voice: 'alice'
       end
     render xml: twiml.to_xml
