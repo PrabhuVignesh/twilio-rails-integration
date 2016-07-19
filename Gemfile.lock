@@ -71,6 +71,7 @@ GEM
       compass (~> 1.0.0)
       sass-rails (< 5.1)
       sprockets (< 2.13)
+    crass (1.0.2)
     cucumber (2.1.0)
       builder (>= 2.1.2)
       cucumber-core (~> 1.3.0)
@@ -152,6 +153,8 @@ GEM
     nenv (0.2.0)
     nokogiri (1.6.7)
       mini_portile2 (~> 2.0.0.rc2)
+    nokogumbo (1.4.7)
+      nokogiri
     notiffany (0.0.8)
       nenv (~> 0.1)
       shellany (~> 0.0)
@@ -213,6 +216,10 @@ GEM
       rspec-expectations (~> 2.13.0)
       rspec-mocks (~> 2.13.0)
     rubyzip (0.9.9)
+    sanitize (4.1.0)
+      crass (~> 1.0.2)
+      nokogiri (>= 1.4.4)
+      nokogumbo (~> 1.4.1)
     sass (3.4.19)
     sass-rails (5.0.4)
       railties (>= 4.0.0, < 5.0)
@@ -290,6 +297,7 @@ DEPENDENCIES
   rails (= 4.0.8)
   rails_12factor (= 0.0.2)
   rspec-rails (= 2.13.1)
+  sanitize
   sass-rails (~> 5.0)
   sdoc (= 0.3.20)
   selenium-webdriver (= 2.35.1)
@@ -299,9 +307,6 @@ DEPENDENCIES
   twilio-ruby
   uglifier (= 2.1.1)
   will_paginate (= 3.0.4)
-
-RUBY VERSION
-   ruby 2.0.0p353
 
 BUNDLED WITH
    1.12.5
