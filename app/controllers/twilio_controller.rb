@@ -95,6 +95,7 @@ To get permission you have, press 4. To record your voice, press 5. To listen la
 
       twiml = Twilio::TwiML::Response.new do |r|
         r.Play params[:RecordingUrl]
+        twiml_say(@output)
       end
       render xml: twiml.to_xml
   end
@@ -103,7 +104,9 @@ To get permission you have, press 4. To record your voice, press 5. To listen la
   private
 
   def agent_voicemail
-      recording = params[:RecordingUrl]
+    status = params[:DialCallStatus] || "completed"
+    recording = params[:RecordingUrl]
+     if (status != "completed" || recording.nil? ) 
       twiml = Twilio::TwiML::Response.new do |r|
         r.Say "Please say something to record", voice: 'alice'
         r.Record maxLength: '20', transcribe: true, transcribeCallback: "/ivr/record_create"
@@ -111,9 +114,14 @@ To get permission you have, press 4. To record your voice, press 5. To listen la
         #r.Record maxLength: '20', transcribe: true
 
         #r.Play params[:RecordingUrl] + ".mp3" if params[:RecordingUrl].present?
-        r.Say "Test voice prabhu.", voice: 'alice'
+        r.Say "Could not get your voice", voice: 'alice'
 
       end
+    else
+      twiml = Twilio::TwiML::Response.new do |r|
+        r.Hangup
+      end
+    end
     render xml: twiml.to_xml
   end
 
