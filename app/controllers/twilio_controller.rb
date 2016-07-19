@@ -78,8 +78,7 @@ To get permission you have, press 4. To record your voice, press 5. To listen la
       twiml = Twilio::TwiML::Response.new do |r|
         r.Play play_mp3.url
       end
-      render xml: twiml.to_xml
-      
+      render xml: twiml.to_xml      
     else
       @output = "Returning to the main menu."
       twiml_say(@output)
