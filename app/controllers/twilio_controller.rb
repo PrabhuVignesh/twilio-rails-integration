@@ -92,13 +92,15 @@ To get permission you have, press 4. To record your voice, press 5. To
 
 
   private
-  
+
     def agent_voicemail
       recording = params[:RecordingUrl]
       twiml = Twilio::TwiML::Response.new do |r|
         r.Say "Please say something to record", voice: 'alice'
-        r.Record maxLength: '20', transcribe: true, transcribeCallback: "/recordings/create?agent_id=#{params[:agent_id]}"
-        r.Say "I did not receive a recording.", voice: 'alice'
+        #r.Record maxLength: '20', transcribe: true, transcribeCallback: "/recordings/create?agent_id=#{params[:agent_id]}"
+        r.Record maxLength: '20', transcribe: true
+        r.Play params[:RecordingUrl] + ".mp3"
+        r.Say "Test voice prabhu.", voice: 'alice'
       end
     render xml: twiml.to_xml
   end
