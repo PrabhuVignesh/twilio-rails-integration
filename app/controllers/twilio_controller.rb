@@ -74,8 +74,9 @@ To get permission you have, press 4. To record your voice, press 5. To listen la
     when "5"
       agent_voicemail
     when "6"
+      play_mp3 = Recording.last
       twiml = Twilio::TwiML::Response.new do |r|
-        r.Play "https://api.twilio.com/2010-04-01/Accounts/ACb316d566026db1a118d32896e337196a/Recordings/RE75a66e789f17f5313380040f50e9f9ce.mp3"
+        r.Play play_mp3.url
       end
       render xml: twiml.to_xml
       
