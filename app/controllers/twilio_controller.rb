@@ -10,7 +10,7 @@ class TwilioController < ApplicationController
   def voice
   	response = Twilio::TwiML::Response.new do |r|
   	  r.Say 'Hi.. welcome to satori application! it is really nice to have you connected with satori application', :voice => 'alice'
-         r.Play 'http://linode.rabasa.com/cantina.mp3'
+      r.Play 'http://linode.rabasa.com/cantina.mp3'
   	end
  
   	render_twiml response
@@ -42,7 +42,7 @@ class TwilioController < ApplicationController
   end
 
   def list_planets
-    message = "To play some music, press 1. To get satori applications, press 2. To get satori community list, press 3. 
+    message = "To play some random music, press 1. To get satori applications, press 2. To get satori community list, press 3. 
 To get permission you have, press 4. To
     go back to the main menu, press the star key."
 
