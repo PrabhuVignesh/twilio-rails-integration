@@ -13,15 +13,19 @@ class RecordingsController < ApplicationController
   def create
     agent_id = params[:agent_id]
 
-    Recording.create(
-      url: params[:RecordingUrl] + ".mp3",
-      transcription: params[:TranscriptionText],
-      phone_number: params[:Caller]
-    )
-    twiml = Twilio::TwiML::Response.new do |r|
-        r.Play params[:RecordingUrl] + ".mp3"
-        r.Say "I did not receive a recording.", voice: 'alice'
-      end   
+    @record = Recording.new
+    @record.url = params[:RecordingUrl] + ".mp3"
+    @record.transcription = params[:TranscriptionText]
+    @record.phone_number = params[:Caller]
+    @record.save
+
+
+
+    # @agent.recordings.create(
+    #   url: params[:RecordingUrl] + ".mp3",
+    #   transcription: params[:TranscriptionText],
+    #   phone_number: params[:Caller]
+    # )
 
     render status: :ok, plain: "Ok"
   end
