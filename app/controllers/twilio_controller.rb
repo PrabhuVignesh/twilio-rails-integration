@@ -92,11 +92,7 @@ To get permission you have, press 4. To record your voice, press 5. To listen la
     @record.transcription = params[:TranscriptionText]
     @record.phone_number = params[:Caller]
     @record.save
-
-      twiml = Twilio::TwiML::Response.new do |r|
-        r.Play params[:RecordingUrl]
-        twiml_say(@output)
-      end
+    twiml_play(params[:RecordingUrl])
       render xml: twiml.to_xml
   end
 
@@ -154,6 +150,24 @@ To get permission you have, press 4. To record your voice, press 5. To listen la
 
     render text: response.text
   end
+
+  def twiml_play(phrase, exit = false)
+    # Respond with some TwiML and say something.
+    # Should we hangup or go back to the main menu?
+    response = Twilio::TwiML::Response.new do |r|
+      r.Play phrase
+      if exit 
+        r.Say "Thank you for calling satori"
+        r.Hangup
+      else
+        r.Redirect welcome_path
+      end
+    end
+
+    render text: response.text
+  end
+
+
 
   def twiml_dial(phone_number)
     response = Twilio::TwiML::Response.new do |r|
