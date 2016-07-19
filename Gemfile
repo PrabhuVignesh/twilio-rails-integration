@@ -17,7 +17,7 @@ gem 'soundcloud', '~> 0.3.2'
 gem 'hashie', '~> 2.0'
 gem 'twilio-ruby'
 gem 'compass-rails', '~> 2.0.4'
-gem 'git-deploy'
+#gem 'git-deploy'
 group :development, :test do
   gem 'sqlite3', '1.3.8'
   gem 'rspec-rails', '2.13.1'
