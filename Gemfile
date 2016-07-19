@@ -18,6 +18,7 @@ gem 'hashie', '~> 2.0'
 gem 'twilio-ruby'
 gem 'compass-rails', '~> 2.0.4'
 #gem 'git-deploy'
+gem 'sanitize'
 group :development, :test do
   gem 'sqlite3', '1.3.8'
   gem 'rspec-rails', '2.13.1'
