@@ -98,7 +98,12 @@ To get permission you have, press 4. To record your voice, press 5. To listen la
 
   def sms_flow
     incoming = Sanitize.clean(params[:From]).gsub(/^\+\d/, '')
-    raise incoming.insepct
+    sms_input = params[:Body].downcase
+    if sms_input == "hi"
+        send_response_sms(incoming,"Hello buddy")
+    else
+      send_default_sms(incoming)
+    end
     # @app_number = ENV['TWILIO_NUMBER']
     # @client = Twilio::REST::Client.new ENV['TWILIO_ACCOUNT_SID'], ENV['TWILIO_AUTH_TOKEN']
     # sms_message = @client.account.messages.create(
@@ -109,6 +114,27 @@ To get permission you have, press 4. To record your voice, press 5. To listen la
   end
 
   private
+
+  def send_default_sms(to)
+    @app_number = ENV['TWILIO_NUMBER']
+    @client = Twilio::REST::Client.new ENV['TWILIO_ACCOUNT_SID'], ENV['TWILIO_AUTH_TOKEN']
+    sms_message = @client.account.messages.create(
+      from: @app_number,
+      to: to,
+      body: "This is sample SMS from satori twilio !!",
+    )
+  end
+
+  def send_response_sms(to,response)
+    @app_number = ENV['TWILIO_NUMBER']
+    @client = Twilio::REST::Client.new ENV['TWILIO_ACCOUNT_SID'], ENV['TWILIO_AUTH_TOKEN']
+    sms_message = @client.account.messages.create(
+      from: @app_number,
+      to: to,
+      body: response,
+    )
+  end
+
 
   def agent_voicemail
     status = params[:DialCallStatus] || "completed"
