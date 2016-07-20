@@ -96,6 +96,17 @@ To get permission you have, press 4. To record your voice, press 5. To listen la
       render xml: twiml.to_xml
   end
 
+  def sms_flow
+    incoming = Sanitize.clean(params[:From]).gsub(/^\+\d/, '')
+    raise incoming.insepct
+    # @app_number = ENV['TWILIO_NUMBER']
+    # @client = Twilio::REST::Client.new ENV['TWILIO_ACCOUNT_SID'], ENV['TWILIO_AUTH_TOKEN']
+    # sms_message = @client.account.messages.create(
+    #   from: @app_number,
+    #   to: "+91 8377003750",
+    #   body: "Hi Prabhu vignesh This is from satori twilio integration",
+    # )
+  end
 
   private
 

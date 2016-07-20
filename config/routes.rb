@@ -14,6 +14,7 @@ MusicHub::Application.routes.draw do
   post 'recordings/create' => 'recordings#create', as: 'new_recording'
 
   match 'ivr/agent_voicemail' => 'twilio#agent_voicemail', via: [:get, :post]
+  match 'sms/sms_flow' => 'twilio#sms_flow', via: [:get, :post], as:'sms_flow'
 
 end
 
