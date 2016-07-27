@@ -10,7 +10,7 @@ class TwilioController < ApplicationController
  
   def voice
   	response = Twilio::TwiML::Response.new do |r|
-  	  r.Say 'Hi.. welcome to satori application! it is really nice to have you connected with satori application', :voice => 'alice'
+  	  r.Say 'Hi.. welcome to satori application! it is really nice to have you connected with satori application..Hear some music..', :voice => 'alice'
       r.Play 'http://linode.rabasa.com/cantina.mp3'
   	end
  
@@ -20,7 +20,7 @@ class TwilioController < ApplicationController
   def ivr_welcome
     response = Twilio::TwiML::Response.new do |r|
       r.Gather numDigits: '1', action: menu_path do |g|
-        g.Say "Press 1 to welcome message, Press 2 for menu!",voice: 'alice', loop: 4
+        g.Say "Hello... Welcome....Press 1 to welcome message, Press 2 for menu!",voice: 'alice', loop: 4
       end
     end
     render text: response.text
